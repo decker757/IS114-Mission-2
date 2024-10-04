@@ -1,0 +1,94 @@
+
+
+.reddit-sans-heading {
+    font-family: "Reddit Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+  }
+  
+  header {
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+  
+  }
+  header a{
+      color:white;
+      text-decoration: none;
+  }
+  
+  nav ul {
+      list-style-type: none;
+      font-family:"Reddit Sans", sans-serif;
+      padding: 0;
+  }
+  
+  nav ul li {
+      display: inline;
+      margin: 0 15px;
+  }
+  
+  nav a {
+      color: white;
+      text-decoration: none;
+  }
+  
+  .products {
+      display: flex;
+      justify-content: center;
+      align-items: center;    
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 20px;
+      gap: 20px;
+      padding-top: 120px;
+  }
+  
+  .product {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      width: 300px; /* Adjust width to suit your layout */
+      box-sizing: border-box;
+      border-radius: 25px;
+      text-decoration: none;
+      height:450px
+  }
+  
+  .product:hover{
+      box-shadow: 0px 0px 20px rgba(0,0,0, 0.2);
+      height: 460px;
+  }
+  
+  .product a {
+      color: black;
+      text-decoration: none;
+  }
+  
+  .product img {
+      max-width: 100%; /* Ensure images do not cause overflow */
+      height: 250px;
+  }
+  
+  
+  
+  footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+  }
+  
+  

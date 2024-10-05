@@ -114,6 +114,7 @@ footer {
 .who-we-are p {
     margin-top: 20px;
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .our-team {
@@ -122,17 +123,32 @@ footer {
 
 .mission {
     margin-top: 70px;
+    text-align: center;
 }
 
 .our-values {
     margin-top: 50px;
+    text-align: center;
 }
 
 .why-choose {
     margin-top: 50px;
+    text-align: center;
 }
 
 .contact {
     margin-top: 50px;
     margin-bottom: 50px;
+    text-align: center;
+}
+
+.contact a {
+    text-decoration: none;
+    color: rgb(70, 70, 70);
+    font-weight: bold;
+}
+
+.our-values ul li {
+    text-align: left;
+    margin: 20px
 }

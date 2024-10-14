@@ -1,0 +1,181 @@
+.reddit-sans-heading {
+    font-family: "Reddit Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+body {
+    font-family: "Reddit Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1; /* Make the main content area take up remaining space */
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+
+}
+header a{
+    color:white;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style-type: none;
+    font-family:"Reddit Sans", sans-serif;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+   
+.product {
+    display: flex;
+    justify-content: space-around; /* Ensure the image and details are closer together */
+    align-items: flex-start;
+    flex-wrap: wrap; /* Ensure wrapping on smaller screens */
+    max-width: 1200px; /* Limit the maximum width of the container */
+    margin: 0 auto; /* Center the content */
+}
+
+.product-images {
+    width: 40%; /* Reduce width for better fit */
+}
+
+.product-images img {
+    width: 100%; /* Ensure image uses full width of its container */
+}
+
+.product-details {
+    margin-top:200px;
+    width: 50%; /* Adjust the width to balance the layout */
+}
+
+
+.image-thumbnails img {
+    width: 100px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.product-details {
+    width: 50%;
+}
+
+.product-details h1 {
+    font-size: 24px;
+
+}
+
+.product-details .price {
+    font-size: 20px;
+    color: #555;
+    
+}
+.product-details p {
+    font-family: 'Roboto', sans-serif;
+}
+.add-to-cart {
+    background-color: #000;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.add-to-cart:hover {
+    background-color: #444;
+}
+
+.description {
+    margin-top: 20px;
+}
+
+.related-products-container {
+    display: flex;
+    flex-direction: column; /* Stack the heading and the products */
+    align-items: center; /* Center both the heading and the products */
+    width: 100%; /* Ensure the container takes full width */
+    margin-top: -80px;
+}
+
+.related-products {
+    display: flex;
+    justify-content: center; /* Center the products within the container */
+    flex-wrap: wrap; /* Allow wrapping to the next line on smaller screens */
+    gap: 50px; /* Add spacing between the products */
+
+}
+
+.related-products h2 {
+    text-align: center; /* Center the heading text */
+    margin-bottom: 20px; /* Add spacing below the heading */
+}
+
+.related-item {
+    display: flex;
+    flex-direction: column; /* Stack the image and text vertically */
+    align-items: center; /* Center the image and text */
+    text-align: center; /* Center the text under each image */
+    width: 200px; /* Set a fixed width for each product */
+}
+
+.related-item img {
+    width: 100%; /* Ensure the image takes the full width of the container */
+    height: auto; /* Maintain the image aspect ratio */
+    border: 1px solid black; /* Add a 1px solid black border around the image */
+    border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+.related-item a {
+    color: black;
+    text-decoration: none; 
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    flex-shrink: 0;
+}
+
+
+
+/* Add responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .product {
+        flex-direction: column; /* Stack the image and details vertically */
+        align-items: center; /* Center align for better mobile experience */
+    }
+    
+    .product-images, .product-details {
+        width: 90%; /* Full width on smaller screens */
+        padding: 0;
+        text-align: center; /* Center text for better readability */
+    }
+
+    .product-details {
+        margin-top: 20px; /* Add spacing between image and details */
+    }
+}

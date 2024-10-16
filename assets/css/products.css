@@ -38,7 +38,6 @@ main{
 header {
     background-color: #333;
     color: white;
-    padding: 10px 0;
     text-align: center;
 
 }
@@ -73,39 +72,45 @@ footer {
 }
 
 .products { /*Used a flexbox to determine the general layout of the page [THIS INCLUDES THE PRODUCTS NAVBAR AND THE FOOTER]*/
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;  
-    -ms-flex-wrap: wrap;  
-        flex-wrap: wrap; 
+    justify-content: center;
+    align-items: flex-start;  
+    flex-wrap: wrap; 
     margin: 0 auto;  
     padding: 20px;
     gap: 20px;
-}
-
-.product {
-    border: 1px solid #ccc;
-    margin-top:100px; /*Centering of the product box*/
-    margin-bottom:100px;
-    padding: 10px;
-    text-align: center;
-    width: 400px; 
-    -webkit-box-sizing: border-box; 
-            box-sizing: border-box;
-    border-radius: 25px;
+    }
+    
+    .product {
+        border: 1px solid #ccc;
+        margin-top:100px; /*Centering of the product box*/
+        margin-bottom:100px;
+        padding: 10px;
+        text-align: center;
+        width: 300px; 
+        box-sizing: border-box;
+        border-radius: 25px;
+        text-decoration: none;
+        height: 450px;
+        transition: all 0.2s ease-in-out; /*Transitions the popping out effect for the hover below*/
+    }
+    
+    .product:hover{
+        box-shadow: 0px 0px 20px rgba(0,0,0, 0.2);
+        transform: scale(1.05); 
+    }
+    
+    .product a {
+    color: black;
     text-decoration: none;
-    height: 360px;
-    -webkit-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out; /*Transitions the popping out effect for the hover below*/
-}
-
+    }
+    
+    .product img {
+        max-width: 100%; 
+        height: 250px;
+        border-radius: 15px;
+    }
+    
 @media (max-width: 768px) {
     .product {
         width: 45%; /* Adjusts width for medium devices */
@@ -135,23 +140,4 @@ footer {
         height: auto;
         margin: 20px; /* Adjusting margins for spacing */
     }
-}
-
-.product:hover{
-    -webkit-box-shadow: 0px 0px 20px rgba(0,0,0, 0.2);
-            box-shadow: 0px 0px 20px rgba(0,0,0, 0.2);
-    -webkit-transform: scale(1.05);
-        -ms-transform: scale(1.05);
-            transform: scale(1.05); 
-}
-
-.product a {
-color: black;
-text-decoration: none;
-}
-
-.product img {
-    max-width: 100%; 
-    height: 250px;
-    border-radius: 15px;
 }

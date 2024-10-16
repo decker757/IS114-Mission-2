@@ -114,7 +114,7 @@ nav a {
     flex-direction: column; /* Stack the heading and the products */
     align-items: center; /* Center both the heading and the products */
     width: 100%; /* Ensure the container takes full width */
-    margin-top: -80px;
+    margin-top: -30px;
 }
 
 .related-products {

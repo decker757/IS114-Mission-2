@@ -56,7 +56,7 @@ nav a {
 }
 
 .product-images {
-    width: 40%; /* Reduce width for better fit */
+    width: 36%; /* Reduce width for better fit */
 }
 
 .product-images img {
@@ -64,7 +64,7 @@ nav a {
 }
 
 .product-details {
-    margin-top:200px;
+    margin-top:120px;
     width: 50%; /* Adjust the width to balance the layout */
 }
 
@@ -114,7 +114,7 @@ nav a {
     flex-direction: column; /* Stack the heading and the products */
     align-items: center; /* Center both the heading and the products */
     width: 100%; /* Ensure the container takes full width */
-    margin-top: -80px;
+    margin-top: -60px;
 }
 
 .related-products {

@@ -40,7 +40,6 @@ GET_URL_FIELD_1 = f"https://api.thingspeak.com/channels/{CHANNEL_ID}/fields/1/la
 # slouch
 GET_URL_FIELD_2 = f"https://api.thingspeak.com/channels/{CHANNEL_ID}/fields/2/last.json?api_key={READ_API_KEY}&status=true"
         
-
 all_field1 = []
 all_field2 = []
 

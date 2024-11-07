@@ -18,10 +18,10 @@ def get_com_port_universal():
 
 def get_variable_and_value(string):
     # returns variable value pair if the string from microbit is valid
-    if ":" in string:
-        variable, value = value.split(':')
-        return variable, value
-    else:
+    try:
+        first, second = value.split(':')
+        return first, second
+    except:
         print('Serial data not in correct format')
         return None
         
@@ -35,21 +35,23 @@ API_FIELDS = {"cycle":"field1", 'slouch':"field2", "light":"field3"}
 
 # initialise serial connection
 ser = serial.Serial(COM_PORT, BAUD_RATE)
+print('out')
 
 # continuously read from com port, 1 while loop 1 cycle
 while True:
-    
+    print('here')
     # Read cycle value from micro:bit
     line_of_mbit_data = ser.readline()
     
     # Convert bytes to string and strip leading/trailing whitespace
     cleaned_line_of_mbit_data = line_of_mbit_data.decode().strip().strip('\n')
+    print(cleaned_line_of_mbit_data)
 
     # get variable name and value
-    if get_variable_and_value(cleaned_line_of_mbit_data) == None:
-        print('Serial data from Micro:Bit not in correct format')
+    if ":" in cleaned_line_of_mbit_data:
+        variable, value = get_variable_and_value(cleaned_line_of_mbit_data)
     else:
-        variable, value = get_variable_and_value(cleaned_line_of_mbit_data)   
+        print('Serial data from Micro:Bit not in correct format')
         
         # process the data and post to thingspeak
         if variable in API_FIELDS:

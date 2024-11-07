@@ -88,13 +88,9 @@ while True:
         #field3 is none
         print('Unable to read field1 from thingspeak')
 
-    
-    lines_for_3 = [f"<tr>{line[field3]}</tr>" for line in field3uniq]
-    lines_for_2 = [f"<tr>{line[field2]}</tr>" for line in field2uniq]
-    lines_for_1 = [f"<tr>{line[field1]}</tr>" for line in field1uniq]
-    print(lines_for_3)
-    print(lines_for_2)
-    print(lines_for_1)
+    print(field3uniq)
+    print(field2uniq)
+    print(field1uniq)
 
     # append all fields to html file together
     time.sleep(30)

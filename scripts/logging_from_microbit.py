@@ -28,17 +28,13 @@ WRITE_API_KEY = base64.b64decode(WRITE_API_KEY_BASE_64).decode()
 COM_PORT = "COM5"
 BAUD_RATE = 115200
 POST_URL = "https://api.thingspeak.com/update.json"
-API_FIELDS = {"cycle":"field1", 'slouch':"field2", "light":"field3"}
+API_FIELDS = {"cycle":"field1", 'slouch':"field2"}
 
 # initialise serial connection
 ser = serial.Serial(COM_PORT, BAUD_RATE)
-print('out')
-
 # continuously read from com port, 1 while loop 1 cycle
 while True:
-    
 
-    print('here')
     # Read cycle value from micro:bit
     line_of_mbit_data = ser.readline()
     

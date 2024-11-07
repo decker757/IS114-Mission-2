@@ -1,94 +1,71 @@
 import time
 import requests
+import serial
 import base64
+import serial.tools.list_ports
 
-def test_post(count):
-    POST_URL = "https://api.thingspeak.com/update.json"
-    json_data = {'api_key':"VPS1BCH04YUJMUBJ", "field2":count}
-    response = requests.post(POST_URL, data=json_data)
-    print(f"posting status {response.status_code}")
-
-def get_request(url):
-    # return json data if code 200, else none
-    response = requests.get(url)
-    if response.status_code == 200:
-        # print(f"Status code {response.status_code}, Received data")
-        if response.json() == -1:
-            # no last entry
-            return None
-        
-        elif type(response.json()) == dict:
-            # returns last value
-            return response.json()
-        
-        else:
-            # unknown json data
-            return None
+def get_com_port_universal():
+    # return first port
+    ports = serial.tools.list_ports.comports()
+    print(ports)
+    if len(ports) != 0:
+        return ports[0].name
     else:
-        # status code 400
         return None
-    
-CHANNEL_ID = 2730808
-READ_API_KEY_BASE_64 = "MzgyS09XQTJPODM1OUhLSg=="
-READ_API_KEY = base64.b64decode(READ_API_KEY_BASE_64).decode()
+
+def get_variable_and_value(string):
+    # returns variable value pair if the string from microbit is valid
+    try:
+        first, second = string.split(':')
+        return first, second
+    except:
+        print('Serial data not in correct format')
+        return None
+        
+
+WRITE_API_KEY_BASE_64 = "VlBTMUJDSDA0WVVKTVVCSg=="
+WRITE_API_KEY = base64.b64decode(WRITE_API_KEY_BASE_64).decode()
+COM_PORT = "COM5"
+BAUD_RATE = 115200
+POST_URL = "https://api.thingspeak.com/update.json"
 API_FIELDS = {"cycle":"field1", 'slouch':"field2", "light":"field3"}
 
-# https://api.thingspeak.com/channels/9/fields/2/last.csv?api_key=E52AWRAV1RSXQQJW&status=true
+# initialise serial connection
+ser = serial.Serial(COM_PORT, BAUD_RATE)
+print('out')
 
-# cycle
-GET_URL_FIELD_1 = f"https://api.thingspeak.com/channels/{CHANNEL_ID}/fields/1/last.json?api_key={READ_API_KEY}&status=true"
-
-# slouch
-GET_URL_FIELD_2 = f"https://api.thingspeak.com/channels/{CHANNEL_ID}/fields/2/last.json?api_key={READ_API_KEY}&status=true"
-
-# light
-GET_URL_FIELD_3 = f"https://api.thingspeak.com/channels/{CHANNEL_ID}/fields/3/last.json?api_key={READ_API_KEY}&status=true"
-
-field1uniq = []
-field2uniq = []
-field3uniq = []
-
-# start reading data from thingspeak
+# continuously read from com port, 1 while loop 1 cycle
 while True:
+
+    print('here')
+    # Read cycle value from micro:bit
+    line_of_mbit_data = ser.readline()
+    print(line_of_mbit_data)
     
-    # get json data
-    field1 = get_request(GET_URL_FIELD_1)
-    # print(field1)
-    field2 = get_request(GET_URL_FIELD_2)
-    # print(field2)
-    field3 = get_request(GET_URL_FIELD_3)
-    # print(field3)
-    
-    # check is data is valid and process
-
-    # {'created_at': '2024-11-07T04:58:14Z', 'entry_id': 4, 'field1': '45', 'status': None}
-
-    if field1 is not None and field1 not in field1uniq:
-        # field 1 is dict
-        field1uniq.append(field1)
+    # Convert bytes to string and strip leading/trailing whitespace
+    cleaned_line_of_mbit_data = line_of_mbit_data.decode().strip().strip('\n').strip('\r')
+    print(cleaned_line_of_mbit_data)
+    '''
+    # get variable name and value
+    if ":" in cleaned_line_of_mbit_data:
+        variable, value = get_variable_and_value(cleaned_line_of_mbit_data)
+        
+        # process the data and post to thingspeak
+        if variable in API_FIELDS:
+            field = API_FIELDS[variable]
+            
+            # prep the data in json to do a post request
+            json_data = {'api_key':WRITE_API_KEY, field:value}
+            
+            # do a post request to api url
+            response = requests.post(POST_URL, data=json_data)
+            if response.status_code == 200:
+                print(f"Status code {response.status_code}, Sent data {json_data}")
+            else:
+                print(f"Status code {response.status_code}, Did not send data")
+        else:
+            print('Data received from Micro:Bit out of scope / not needed')
+        
     else:
-        #field1 is none
-        print('Unable to read field1 from thingspeak')
-
-    if field2 is not None and field2 not in field2uniq:
-        # field2 is dict
-        field2uniq.append(field2)
-    else:
-        # field2 is none
-        print('Unable to read field1 from thingspeak')
-
-    if field3 is not None and field3 not in field3uniq:
-        # field3 is dict
-        field3uniq.append(field3)
-    else:
-        #field3 is none
-        print('Unable to read field1 from thingspeak')
-
-    print(field3uniq)
-    print(field2uniq)
-    print(field1uniq)
-
-    # append all fields to html file together
-    time.sleep(30)
-
-    
+        print('Serial data from Micro:Bit not in correct format')
+        '''

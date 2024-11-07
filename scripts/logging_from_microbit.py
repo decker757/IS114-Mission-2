@@ -5,16 +5,13 @@ import base64
 import serial.tools.list_ports
 
 def get_com_port_universal():
-    # if 1 com port detected, return it as a string
-    # if multiple com ports detected, return a list of string
+    # return first port
     ports = serial.tools.list_ports.comports()
-    if len(ports) == 1:
+    print(ports)
+    if len(ports) != 0:
         return ports[0].name
     else:
-        r_lis = []
-        for port in ports:
-            r_lis.append(port.name)
-        return r_lis
+        return None
 
 def get_variable_and_value(string):
     # returns variable value pair if the string from microbit is valid
@@ -28,7 +25,7 @@ def get_variable_and_value(string):
 
 WRITE_API_KEY_BASE_64 = "VlBTMUJDSDA0WVVKTVVCSg=="
 WRITE_API_KEY = base64.b64decode(WRITE_API_KEY_BASE_64).decode()
-COM_PORT = get_com_port_universal()
+COM_PORT = "COM5"
 BAUD_RATE = 115200
 POST_URL = "https://api.thingspeak.com/update.json"
 API_FIELDS = {"cycle":"field1", 'slouch':"field2", "light":"field3"}
@@ -39,12 +36,14 @@ print('out')
 
 # continuously read from com port, 1 while loop 1 cycle
 while True:
+    
+
     print('here')
     # Read cycle value from micro:bit
     line_of_mbit_data = ser.readline()
     
     # Convert bytes to string and strip leading/trailing whitespace
-    cleaned_line_of_mbit_data = line_of_mbit_data.decode().strip().strip('\n')
+    cleaned_line_of_mbit_data = line_of_mbit_data.decode().strip().strip('\n').strip('\r')
     print(cleaned_line_of_mbit_data)
 
     # get variable name and value

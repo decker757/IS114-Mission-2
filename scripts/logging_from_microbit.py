@@ -31,7 +31,7 @@ WRITE_API_KEY = base64.b64decode(WRITE_API_KEY_BASE_64).decode()
 COM_PORT = get_com_port_universal()
 BAUD_RATE = 115200
 POST_URL = "https://api.thingspeak.com/update.json"
-API_FIELDS = {"cycle":"field1", 'slouch':"field2", "light":"field3", "availability":"field4"}
+API_FIELDS = {"cycle":"field1", 'slouch':"field2", "light":"field3"}
 
 # initialise serial connection
 ser = serial.Serial(COM_PORT, BAUD_RATE)
@@ -43,7 +43,7 @@ while True:
     line_of_mbit_data = ser.readline()
     
     # Convert bytes to string and strip leading/trailing whitespace
-    cleaned_line_of_mbit_data = mbit_data.decode().strip().strip('\n')
+    cleaned_line_of_mbit_data = line_of_mbit_data.decode().strip().strip('\n')
 
     # get variable name and value
     if get_variable_and_value(cleaned_line_of_mbit_data) == None:

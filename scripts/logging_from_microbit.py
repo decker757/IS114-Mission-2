@@ -60,7 +60,7 @@ while True:
             
             # do a post request to api url
             response = requests.post(POST_URL, data=json_data)
-            if response.status_code == '200':
+            if response.status_code == 200:
                 print(f"Status code {response.status_code}, Sent data {json_data}")
             else:
                 print(f"Status code {response.status_code}, Did not send data")
